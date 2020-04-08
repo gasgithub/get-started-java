@@ -23,9 +23,7 @@ public class VisitorStoreFactory {
     static {
 System.out.println("### VisitorStoreFactory");      	
         // Only use MongoDB if credentials are available.
-        if (VCAPHelper.getCloudCredentials("mongodb") == null &&
-            (VCAPHelper.getLocalProperties("mongo.properties").getProperty("mongo_url") == null ||
-             VCAPHelper.getLocalProperties("mongo.properties").getProperty("mongo_url").equals(""))) {
+        if (System.getenv("MONGO_URL") == null ) {
             CloudantVisitorStore cvif = new CloudantVisitorStore();
             if (cvif.getDB() != null) {
                 instance = cvif;
