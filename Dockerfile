@@ -11,7 +11,7 @@ RUN configure.sh
 # docker build -t getstartedjava:webProfile8 .
 
 # docker run -d --name myjavacontainer getstartedjava
-# docker run -p 9080:9080 -e MONGO_URL='mongodb://gasp53:27017' --name myjavacontainer getstartedjava
+# docker run -p 9080:9080 -e MONGO_URL=mongodb://gasp53:27017 --name myjavacontainer getstartedjava
 # Visit http://localhost:9080/GetStartedJava/
 
 # docker run --name getstarted-mongo -d -p 27017:27017 mongo
