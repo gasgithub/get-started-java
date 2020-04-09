@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Secret
+apiVersion: v1
+metadata:
+  name: mongo-url
+data:
+  mongo-url: bW9uZ29kYjovL21vbmdvZGI6bW9uZ29kYkBtb25nb2RiOjI3MDE3Lz9hdXRoU291cmNlPW15ZGI=
+type: Opaque 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: get-started-java-deployment
+  labels:
+    app: get-started-java
+spec:
+  selector:
+    matchLabels:
+      app: get-started-java
+  template:
+    metadata:
+      labels:
+        app: get-started-java
+    spec:
+      containers:
+      - name: get-started-java-container
+        image: image-registry.openshift-image-registry.svc:5000/get-started-java/getstartedjava
+        ports:
+        - containerPort: 9080
+        env:
+          - name: MONGO_URL
+            valueFrom:
+              secretKeyRef:
+                name: mongo-url
+                key: mongo-url   
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: get-started-java-service
+spec:
+  selector:
+    app: get-started-java
+  ports:
+  - protocol: TCP
+    port: 9080
+---    
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: get-started-java
+spec:
+  host: >-
+    get-started-java-get-started-java.spx-ocp-c01-9cb7e5637afa55ea707aef0b31c19bc5-0000.eu-de.containers.appdomain.cloud
+  to:
+    kind: Service
+    name: get-started-java-service
+  port:
+    targetPort: 9080
+ 
+    
