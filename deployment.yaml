@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: get-started-java-container
-        image: image-registry.openshift-image-registry.svc:5000/get-started-java/getstartedjava
+        image: get-started-java
         ports:
         - containerPort: 9080
         env:
