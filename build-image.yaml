@@ -13,7 +13,6 @@ spec:
     type: Binary
   strategy:
     dockerStrategy:
-      forcePull: true
       from:
         kind: ImageStreamTag
         name: websphere-liberty:kernel-ubi-min
