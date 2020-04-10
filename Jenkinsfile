@@ -86,7 +86,7 @@ pipeline {
           openshift.withCluster() {
             openshift.withProject("${env.DEV}") {
               def s = openshift.selector('deployment', 'get-started-java-deployment').exists()
-              echo "There are ${s.count()} objects of type deployment"
+              echo "Deployment exists: ${s}"
               //s.delete()
               echo "Objects deleted"
               
