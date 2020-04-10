@@ -93,7 +93,7 @@ pipeline {
               //s.delete()
               echo "Objects deleted"
               
-              def fromYAML = openshift.apply(readfile("deployment.yaml"))
+              def fromYAML = openshift.apply(readFile("deployment.yaml"))
               echo "Created objects from JSON file: ${fromYAML.names()}"
             }
           }
