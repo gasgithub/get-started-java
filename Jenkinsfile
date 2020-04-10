@@ -84,7 +84,7 @@ pipeline {
           println "apply config:"
           sh "cat deployment.yaml"
           openshift.withCluster() {
-            openshift.withProject(${env.DEV}) {
+            openshift.withProject("${env.DEV}") {
               def s = openshift.selector('deployment', 'get-started-java-deployment').exists()
               echo "There are ${s.count()} objects of type deployment"
               //s.delete()
