@@ -78,7 +78,25 @@ pipeline {
         }
       }
     }
-
+    stage('Deploy to Dev') {
+      steps {
+        script {
+          println "apply config:"
+          sh "cat deployment.yaml"
+          openshift.withCluster() {
+            openshift.withProject(${env.DEV}) {
+              def s = openshift.selector('deployment', 'get-started-java-deployment').exists()
+              echo "There are ${s.count()} objects of type deployment"
+              //s.delete()
+              echo "Objects deleted"
+              
+              def fromYAML = openshift.apply(readfile("deployment.yaml"))
+              echo "Created objects from JSON file: ${fromYAML.names()}"
+            }
+          }
+        }
+      }
+    }
 /*    stage('Promote to Stage') {
       steps {
         script {
