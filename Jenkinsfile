@@ -20,6 +20,9 @@ pipeline {
                     openshift.withProject() {
                         echo "Using project: ${openshift.project()}"
                         echo "APPLICATION_NAME: ${params.APPLICATION_NAME}"
+                        echo "Build ID: ${BUILD_ID}"
+                        echo "BUILD_NUMBER: ${BUILD_NUMBER}"
+                        echo "BUILD_TAG: ${BUILD_TAG}"
                     }
                 }
             }
