@@ -13,6 +13,9 @@ metadata:
   name: get-started-java-deployment
   labels:
     app: get-started-java
+  annotations:
+    image.openshift.io/triggers: >-
+      [{"from":{"kind":"ImageStreamTag","name":"get-started-java:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"get-started-java-container\")].image"}]
 spec:
   selector:
     matchLabels:
@@ -24,7 +27,7 @@ spec:
     spec:
       containers:
       - name: get-started-java-container
-        image: image-registry.openshift-image-registry.svc:5000/get-started-java/get-started-java
+        image: get-started-java
         ports:
         - containerPort: 9080
         env:
