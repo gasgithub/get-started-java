@@ -4,8 +4,8 @@ openshift.withCluster() {
   echo "Starting Pipeline for ${APP_NAME}..."
   env.BUILD = "${env.NAMESPACE}"
   env.DEV = "${APP_NAME}"
-#  env.STAGE = "${APP_NAME}-stage"
-#  env.PROD = "${APP_NAME}-prod"
+//  env.STAGE = "${APP_NAME}-stage"
+//  env.PROD = "${APP_NAME}-prod"
 }
 
 pipeline {
@@ -79,36 +79,37 @@ pipeline {
       }
     }
 
-#    stage('Promote to Stage') {
-#      steps {
-#        script {
-#          openshift.withCluster() {
-#            openshift.withProject() {
-#              openshift.tag("${env.DEV}/${env.APP_NAME}:latest", "${env.STAGE}/${env.APP_NAME}:latest")
-#            }
-#          }
-#        }
- #     }
- #   }
+/*    stage('Promote to Stage') {
+      steps {
+        script {
+          openshift.withCluster() {
+            openshift.withProject() {
+              openshift.tag("${env.DEV}/${env.APP_NAME}:latest", "${env.STAGE}/${env.APP_NAME}:latest")
+            }
+          }
+        }
+      }
+    }
 
-#    stage('Promotion gate') {
-#      steps {
-#        script {
-#          input message: 'Promote application to Production?'
-#        }
-#      }
-#    }
+    stage('Promotion gate') {
+      steps {
+        script {
+          input message: 'Promote application to Production?'
+        }
+      }
+    }
 
-#    stage('Promote to Prod') {
-#      steps {
-#        script {
-#          openshift.withCluster() {
-#            openshift.withProject() {
-#              openshift.tag("${env.STAGE}/${env.APP_NAME}:latest", "${env.PROD}/${env.APP_NAME}:latest")
-#            }
-#          }
-#        }
-#      }
-#    }
+    stage('Promote to Prod') {
+      steps {
+        script {
+          openshift.withCluster() {
+            openshift.withProject() {
+              openshift.tag("${env.STAGE}/${env.APP_NAME}:latest", "${env.PROD}/${env.APP_NAME}:latest")
+            }
+          }
+        }
+      }
+    }
+    */
   }
 }
