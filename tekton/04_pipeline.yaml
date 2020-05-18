@@ -3,15 +3,15 @@ kind: Pipeline
 metadata:
   name: build-and-deploy
 spec:
+  params:
+  - name: deployment-name
+    type: string
+    description: name of the deployment to be patched
   resources:
   - name: git-repo
     type: git
   - name: image
     type: image
-  params:
-  - name: deployment-name
-    type: string
-    description: name of the deployment to be patched
   tasks:
   - name: build-image
     taskRef:
