@@ -1,7 +1,7 @@
 FROM ibmcom/websphere-liberty:kernel-java8-ibmjava-ubi
 #FROM ibmcom/websphere-liberty:webProfile8-ubi-min
 
-COPY --chown=1001:0  target/GetStartedJava.war /config/apps/
+COPY --chown=1001:0  ./target/GetStartedJava.war /config/apps/
 COPY --chown=1001:0  server.xml /config/
 RUN configure.sh
 
