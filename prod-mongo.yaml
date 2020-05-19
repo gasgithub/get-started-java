@@ -1,0 +1,8 @@
+apiVersion: apps/v1
+kind: Secret
+apiVersion: v1
+metadata:
+  name: prod-mongo-url
+data:
+  mongo-url: bW9uZ29kYjovL21vbmdvZGI6bW9uZ29kYkBtb25nb2RiOjI3MDE3Lz9hdXRoU291cmNlPW15ZGI=
+type: Opaque 
