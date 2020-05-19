@@ -16,7 +16,7 @@ spec:
   - apiVersion: tekton.dev/v1alpha1
     kind: PipelineResource
     metadata:
-      name: app-repo
+      name: app-repo-$(uid)
     spec:
       type: git
       params:
@@ -28,7 +28,7 @@ spec:
   - apiVersion: tekton.dev/v1alpha1
     kind: PipelineResource
     metadata:
-      name: app-image
+      name: app-image-$(uid)
     spec:
       type: image
       params:
@@ -46,10 +46,10 @@ spec:
       resources:
       - name: git-repo
         resourceRef:
-          name: app-repo
+          name: app-repo-$(uid)
       - name: image
         resourceRef:
-          name: app-image
+          name: app-image-$(uid)
       params:
       - name: deployment-name
         value: $(params.git-repo-name)
