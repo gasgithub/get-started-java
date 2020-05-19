@@ -1,0 +1,11 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: get-started-java-event-listener
+spec:
+  serviceAccountName: pipeline
+  triggers:
+  - bindings:
+    - name: get-started-java-trigger-binding
+    template:
+      name: get-started-java-trigger-template
