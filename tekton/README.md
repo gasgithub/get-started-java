@@ -17,4 +17,5 @@ oc adm policy add-scc-to-user anyuid -z default
 expose ev listneertt
 ```
 oc expose svc el-get-started-java-event-listener
+oc  get route el-get-started-java-event-listener --template='http://{{.spec.host}}'
 ```
