@@ -5,7 +5,7 @@ openshift.withCluster() {
   env.BUILD = "${env.NAMESPACE}"
   env.DEV = "${APP_NAME}"
 //  env.STAGE = "${APP_NAME}-stage"
-//  env.PROD = "${APP_NAME}-prod"
+  env.PROD = "${APP_NAME}-prod"
 }
 
 pipeline {
@@ -111,7 +111,7 @@ pipeline {
         }
       }
     }
-
+*/
     stage('Promotion gate') {
       steps {
         script {
@@ -125,12 +125,30 @@ pipeline {
         script {
           openshift.withCluster() {
             openshift.withProject() {
-              openshift.tag("${env.STAGE}/${env.APP_NAME}:latest", "${env.PROD}/${env.APP_NAME}:latest")
+              openshift.tag("${env.DEV}/${env.APP_NAME}:latest", "${env.PROD}/${env.APP_NAME}:latest")
             }
           }
         }
       }
     }
-    */
+    stage('Deploy to Prod') {
+      steps {
+        script {
+          println "apply config:"
+          sh "cat deployment.yaml"
+          openshift.withCluster() {
+            openshift.withProject("${env.PROD}") {
+              def s = openshift.selector('deployment', 'get-started-java-deployment').exists()
+              echo "Deployment exists: ${s}"
+              //s.delete()
+              echo "Objects deleted"
+              
+              def fromYAML = openshift.apply(readFile("deployment.yaml"))
+              echo "Created objects from JSON file: ${fromYAML.names()}"
+            }
+          }
+        }
+      }
+    }
   }
 }
