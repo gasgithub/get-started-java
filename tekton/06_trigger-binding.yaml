@@ -1,7 +1,7 @@
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerBinding
 metadata:
-  name: get-started-java-tekton
+  name: get-started-java-trigger-binding
 spec:
   params:
   - name: git-repo-url
