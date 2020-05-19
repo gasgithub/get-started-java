@@ -39,7 +39,7 @@ spec:
         - |
           echo Building Image $(outputs.resources.image.url)
           echo -----------------------------------
-          buildah bud --tls-verify=$(inputs.params.TLSVERIFY) --layers -f $(inputs.params.DOCKERFILE) -t $(outputs.resources.image.url) $(inputs.params.CONTEXT)
+          buildah bud --tls-verify=$(inputs.params.TLSVERIFY) --no-cache -f $(inputs.params.DOCKERFILE) -t $(outputs.resources.image.url) $(inputs.params.CONTEXT)
           echo Pushing Image $(outputs.resources.image.url)
           buildah push --tls-verify=$(inputs.params.TLSVERIFY) $(outputs.resources.image.url) docker://$(outputs.resources.image.url)
       securityContext:
