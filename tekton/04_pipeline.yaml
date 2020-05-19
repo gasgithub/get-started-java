@@ -21,6 +21,8 @@ spec:
       - name: source
         resource: git-repo
       outputs:
+      - name: source
+        resource: git-repo
       - name: image
         resource: image
     params:
