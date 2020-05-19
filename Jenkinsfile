@@ -85,7 +85,7 @@ pipeline {
       steps {
         script {
           println "apply config:"
-          sh "cat deployment.yaml"
+          sh "cat ./k8s/deployment.yaml"
           openshift.withCluster() {
             openshift.withProject("${env.DEV}") {
               def s = openshift.selector('deployment', 'get-started-java-deployment').exists()
@@ -93,7 +93,7 @@ pipeline {
               //s.delete()
               echo "Objects deleted"
               
-              def fromYAML = openshift.apply(readFile("deployment.yaml"))
+              def fromYAML = openshift.apply(readFile("./k8s/deployment.yaml"))
               echo "Created objects from JSON file: ${fromYAML.names()}"
             }
           }
@@ -135,7 +135,7 @@ pipeline {
       steps {
         script {
           println "apply config:"
-          sh "cat deployment.yaml"
+          sh "cat ./k8s/deployment.yaml"
           openshift.withCluster() {
             openshift.withProject("${env.PROD}") {
               def s = openshift.selector('deployment', 'get-started-java-deployment').exists()
@@ -143,7 +143,7 @@ pipeline {
               //s.delete()
               echo "Objects deleted"
               
-              def fromYAML = openshift.apply(readFile("deployment.yaml"))
+              def fromYAML = openshift.apply(readFile("./k8s/deployment.yaml"))
               echo "Created objects from JSON file: ${fromYAML.names()}"
             }
           }
