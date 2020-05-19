@@ -12,3 +12,9 @@ tkn pipeline start build-and-deploy -r git-repo=app-repo -r image=app-image -p d
 ```
 oc adm policy add-scc-to-user anyuid -z default
 ```
+
+
+expose ev listneertt
+```
+oc expose svc el-get-started-java-event-listener
+```
