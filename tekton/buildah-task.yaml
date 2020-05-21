@@ -3,6 +3,9 @@ kind: Task
 metadata:
   name: buildah-task
 spec:
+  workspaces:
+    - name: pipeline-workspace
+      mountPath: /workspace/source
   inputs:
     params:
       - name: BUILDER_IMAGE
@@ -17,15 +20,10 @@ spec:
       - name: TLSVERIFY
         description: Verify the TLS on the registry endpoint (for push/pull to a non-TLS registry)
         default: "false"
-    resources:
-      - name: source
-        type: git
   outputs:
     resources:
       - name: image
         type: image
-      - name: source
-        type: git
   steps:
     - name: build
       image: $(inputs.params.BUILDER_IMAGE)

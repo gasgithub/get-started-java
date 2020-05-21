@@ -1,0 +1,29 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: cleanup-folder-task
+spec:
+  workspaces:
+  - name: pipeline
+    description: The workspace to be cleaned up
+    mountPath: /workspace/source
+  inputs:
+    params:
+    - name: path
+      description: To be cleaned up path using rm -rf
+  steps:
+  - name: cleanup-folder
+    image: alpine:latest
+    script: |
+      echo "Listing current"
+      echo "---------------"
+      ls -la
+      echo "Listing workspace"
+      echo "---------------"
+      ls -la "$(workspaces.pipeline.path)"
+      echo "Listing param"
+      echo "---------------"
+      ls -la "$(workspaces.pipeline.path)/$(inputs.params.path)"
+      rm -rf "$(workspaces.pipeline.path)/$(inputs.params.path)"
+    securityContext:
+      privileged: true 
