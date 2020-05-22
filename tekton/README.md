@@ -1,9 +1,12 @@
-##Install OpenShift Pipelines
+## Install OpenShift Pipelines
 Install via Operator Hub
 
-##Define resources
+## Define resources
 
-##Run pipeline
+## migrating-v1alpha1-to-v1beta1
+https://github.com/tektoncd/pipeline/blob/master/docs/migrating-v1alpha1-to-v1beta1.md#replacing-an-image-resource
+
+## Run pipeline
 For testing pipline I created additional pipeline run yaml, which can be invoked like this:
 ```
 oc apply -f 04_pipeline-run-test.yaml
