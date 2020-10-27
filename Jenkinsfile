@@ -1,9 +1,10 @@
 openshift.withCluster() {
   env.NAMESPACE = openshift.project()
-  env.APP_NAME = "${JOB_NAME}".replaceAll(/-build.*/, '')
+  env.APP_NAME = ${params.APPLICATION_NAME}
+  //  "${JOB_NAME}".replaceAll(/-pipeline.*/, '')
   echo "Starting Pipeline for ${APP_NAME}..."
   env.BUILD = "${env.NAMESPACE}"
-  env.DEV = "${APP_NAME}"
+  env.DEV = "${env.NAMESPACE}"
 //  env.STAGE = "${APP_NAME}-stage"
   env.PROD = "${APP_NAME}-prod"
 }
@@ -20,6 +21,8 @@ pipeline {
                     openshift.withProject() {
                         echo "Using project: ${openshift.project()}"
                         echo "APPLICATION_NAME: ${params.APPLICATION_NAME}"
+                        echo "env.BUILD: ${env.BUILD}"
+                        echo "Job name: ${JOB_NAME}"
                         echo "Build ID: ${BUILD_ID}"
                         echo "BUILD_NUMBER: ${BUILD_NUMBER}"
                         echo "BUILD_TAG: ${BUILD_TAG}"
@@ -34,7 +37,6 @@ pipeline {
         sh """
         env
         mvn -v 
-        # cd CustomerOrderServicesProject
         mvn clean package
         """
       }
@@ -44,9 +46,7 @@ pipeline {
     stage('Unit Test'){
       steps {
         sh """
-        mvn -v 
-        # cd CustomerOrderServicesProject
-        # mvn test
+        mvn test
         """
       }
     }
