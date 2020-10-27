@@ -6,7 +6,7 @@ openshift.withCluster() {
   env.BUILD = "${env.NAMESPACE}"
   env.DEV = "${env.NAMESPACE}"
 //  env.STAGE = "${APP_NAME}-stage"
-  env.PROD = "${APP_NAME}-prod"
+  env.PROD = "${env.NAMESPACE}-prod"
 }
 
 pipeline {
