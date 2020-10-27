@@ -4,7 +4,7 @@ apiVersion: v1
 metadata:
   name: mongo-url
 data:
-  mongo-url: bW9uZ29kYjovL21vbmdvZGI6bW9uZ29kYkBtb25nb2RiOjI3MDE3Lz9hdXRoU291cmNlPW15ZGI=
+  mongo-url: bW9uZ29kYjovL21vbmdvOm1vbmdvQG1vbmdvZGI6MjcwMTcvP2F1dGhTb3VyY2U9bXlkYg==
 type: Opaque 
 ---
 apiVersion: apps/v1
